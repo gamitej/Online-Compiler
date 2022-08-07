@@ -6,7 +6,8 @@ app = Flask(__name__)
 CORS(app)
 
 # ================ TO RUN THE INPUT.TXT WITH PYTHON FILE ====================
-content = "import sys\nsys.stdin=open('input.txt','r')"
+content = "import sys\nsys.stdin=open('input.txt','r')\n"
+
 
 
 def fileReadWrite(code, input):
@@ -22,6 +23,7 @@ def fileReadWrite(code, input):
         res = f.read()
         return res, True
     except Exception as e:
+        print(e)
         return e, False
 
 
