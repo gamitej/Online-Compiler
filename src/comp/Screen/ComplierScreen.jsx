@@ -54,6 +54,7 @@ const ComplierScreen = ({ userLang, userCode }) => {
 				<h4>Input:</h4>
 				<div className="input-box">
 					<textarea
+						className="w-full max-h-20"
 						id="code-inp"
 						onChange={(e) => setUserInput(e.target.value)}
 					></textarea>
