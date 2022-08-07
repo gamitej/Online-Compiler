@@ -1,12 +1,6 @@
-import spinner from "../../spinner.gif";
+import React from "react";
 
-const ComplierScreen = ({
-	btnClass,
-	setUserInput,
-	userOutput,
-	clearOutput,
-	loading,
-}) => {
+const ComplierScreen = ({ setUserInput, userOutput, loading }) => {
 	return (
 		<div className="h-[15rem]">
 			<div className="flex flex-col bg-[#242424] p-3 relaive">
@@ -17,24 +11,22 @@ const ComplierScreen = ({
 						onChange={(e) => setUserInput(e.target.value)}
 					></textarea>
 				</div>
-				<h4 className="text-[#afec3f]">Output:</h4>
+				<h4 className="text-[#afec3f]">
+					Output : 
+				</h4>
 				{loading ? (
 					<div className="flex h-[12rem] bg-[#242424] overflow-y-auto justify-center items-center">
-						<img src={spinner} alt="Loading..." />
+						<p className="text-white">Compiling ... </p>
 					</div>
 				) : (
-					<div className="flex h-[12rem] bg-[#242424] overflow-y-auto text-white relative">
-						<p className="h-80 whitespace-pre-wrap font-lg">
+					<div
+						className="flex h-[12rem] overflow-y-auto text-white relative"
+					>
+						<p
+							className="h-full w-full whitespace-pre-wrap font-lg border-2 p-2"
+						>
 							{userOutput}
 						</p>
-						<button
-							onClick={() => {
-								clearOutput();
-							}}
-							className={`${btnClass} active:bg-[#6e9427] absolute bottom-2 right-2`}
-						>
-							Clear
-						</button>
 					</div>
 				)}
 			</div>

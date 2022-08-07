@@ -30,7 +30,7 @@ function App() {
 	const [loading, setLoading] = useState(false);
 
 	// Function to call the compile endpoint
-	function compile() {
+	const compile = () => {
 		console.log(userCode);
 		setLoading(true);
 		if (userCode === ``) {
@@ -45,30 +45,23 @@ function App() {
 			input: userInput,
 		}).then((res) => {
 			console.log(res.data.data);
-			setUserOutput(res.data.data);
+			setUserOutput(res.data.output);
+			setLoading(false);
 		});
-		setLoading(false);
-	}
-
-	// Function to clear the output screen
-	function clearOutput() {
-		setUserOutput("");
-	}
+	};
 
 	const btnClass =
 		"inline-block px-7 py-3 bg-blue-600 text-white font-medium text-sm leading-snug uppercase rounded shadow-md hover:bg-blue-700 hover:shadow-lg focus:bg-blue-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-800 active:shadow-lg transition duration-150 ease-in-out";
 
 	const screenProps = {
-		btnClass,
 		setUserInput,
 		userOutput,
 		compile,
 		loading,
-		clearOutput,
 	};
 
 	return (
-		<div className="flex flex-col h-screen w-[100%] justify-center items-center">
+		<div className="flex flex-col h-screen w-full justify-center items-center">
 			<div className="w-[50%]">
 				<Navbar
 					userLang={userLang}
@@ -81,7 +74,7 @@ function App() {
 					compile={compile}
 				/>
 				<div className="w-full flex">
-					<div className="w-[60%] h-[30rem]">
+					<div className="w-[100%] h-[30rem] border rounded-2xl lg-mr-6 shadow-md">
 						<Editor
 							options={options}
 							width="100%"
@@ -94,7 +87,7 @@ function App() {
 							}}
 						/>
 					</div>
-					<div className="w-[40%]">
+					<div className="w-[40%] border rounded-2xl lg-mr-6 shadow-md">
 						<CodingScreen {...screenProps} />
 					</div>
 				</div>

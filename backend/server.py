@@ -6,14 +6,14 @@ app = Flask(__name__)
 CORS(app)
 
 # ================ TO RUN THE INPUT.TXT WITH PYTHON FILE ====================
-content = "import sys\nsys.stdin=open('input.txt','r')\n"
-
+content = "import sys\nsys.stdin=open('input.txt','r')\n\ntry:\n"
+error = "\nexcept Exception as e:\n\tprint([e,'error while compling'])"
 
 
 def fileReadWrite(code, input):
     try:
         fileName = ['a.py', 'input.txt']
-        fileInput = [content+code, input]
+        fileInput = [content+code+error, input]
         for i in range(2):
             f = open(fileName[i], 'w')
             f.write(fileInput[i])
@@ -21,6 +21,8 @@ def fileReadWrite(code, input):
         os.system("python3 a.py > output.txt")
         f = open("output.txt", "r")
         res = f.read()
+        if len(res) == 2 and res[1] == 'error while compling':
+            return res[0], False
         return res, True
     except Exception as e:
         print(e)
@@ -31,13 +33,13 @@ def fileReadWrite(code, input):
 def compile():
     try:
         req = request.get_json()
-        # print(req)
-        code, input = req['code'], req['input']
-        if code and input:
+        code, input = req['code'].replace("\n", "\n\t"), req['input']
+        if code:
+
             res, type = fileReadWrite(code, input)
             if type:
-                return jsonify({"data": res}), 200
-            return jsonify({"data": res}), 200
+                return jsonify({"output": res, "status": 'Success'}), 200
+            return jsonify({"output": res, "status": 'Error'}), 200
 
         return jsonify({"data": "Something Went Wrong"}), 400
 
