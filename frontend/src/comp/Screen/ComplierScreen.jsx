@@ -23,7 +23,7 @@ const ComplierScreen = ({ setUserInput, userOutput, loading }) => {
 						className="flex h-[12rem] overflow-y-auto text-white relative"
 					>
 						<p
-							className="h-full w-full whitespace-pre-wrap font-lg border-2 p-2"
+							className="h-full w-full whitespace-pre-wrap font-lg p-2"
 						>
 							{userOutput}
 						</p>

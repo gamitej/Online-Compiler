@@ -3,6 +3,9 @@ sys.stdin=open('input.txt','r')
 
 try:
 # Enter your code here
-	print(1 == 1)
+	n = int(input())
+	for i in range(n):
+	    for j in range(i,-1,-1):
+	        print("*")
 except Exception as e:
 	print([e,'error while compling'])
