@@ -27,28 +27,27 @@ function App() {
 	const [userOutput, setUserOutput] = useState("");
 
 	// Loading state variable to show spinner
-	const [loading, setLoading] = useState(true);
+	const [loading, setLoading] = useState(false);
 
 	// Function to call the compile endpoint
 	function compile() {
 		console.log(userCode);
 		setLoading(true);
 		if (userCode === ``) {
+			setLoading(false);
 			return;
 		}
 
 		// Post request to compile endpoint
-		Axios.post(`http://localhost:8000/compile`, {
+		Axios.post(`http://127.0.0.1:5000/compile`, {
 			code: userCode,
-			language: userLang,
+			language: "py",
 			input: userInput,
-		})
-			.then((res) => {
-				setUserOutput(res.data.output);
-			})
-			.then(() => {
-				setLoading(false);
-			});
+		}).then((res) => {
+			console.log(res.data.data);
+			setUserOutput(res.data.data);
+		});
+		setLoading(false);
 	}
 
 	// Function to clear the output screen
@@ -69,33 +68,35 @@ function App() {
 	};
 
 	return (
-		<div className="h-screen">
-			<Navbar
-				userLang={userLang}
-				setUserLang={setUserLang}
-				userTheme={userTheme}
-				setUserTheme={setUserTheme}
-				fontSize={fontSize}
-				setFontSize={setFontSize}
-				btnClass={btnClass}
-			/>
-			<div className="w-full flex">
-				<div className="w-[60%]">
-					<Editor
-						options={options}
-						height="calc(95vh - 15px)"
-						width="100%"
-						theme={userTheme}
-						language={userLang}
-						defaultLanguage="python"
-						defaultValue="# Enter your code here"
-						onChange={(value) => {
-							setUserCode(value);
-						}}
-					/>
-				</div>
-				<div className="w-[40%]">
-					<CodingScreen {...screenProps} />
+		<div className="flex flex-col h-screen w-[100%] justify-center items-center">
+			<div className="w-[50%]">
+				<Navbar
+					userLang={userLang}
+					setUserLang={setUserLang}
+					userTheme={userTheme}
+					setUserTheme={setUserTheme}
+					fontSize={fontSize}
+					setFontSize={setFontSize}
+					btnClass={btnClass}
+					compile={compile}
+				/>
+				<div className="w-full flex">
+					<div className="w-[60%] h-[30rem]">
+						<Editor
+							options={options}
+							width="100%"
+							theme={userTheme}
+							language={userLang}
+							defaultLanguage="python"
+							defaultValue="# Enter your code here"
+							onChange={(value) => {
+								setUserCode(value);
+							}}
+						/>
+					</div>
+					<div className="w-[40%]">
+						<CodingScreen {...screenProps} />
+					</div>
 				</div>
 			</div>
 		</div>
