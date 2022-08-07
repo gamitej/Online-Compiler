@@ -24,20 +24,24 @@ const Navbar = ({
 		setFontSize(e.target.value);
 	};
 	return (
-		<div className="navbar">
-			<h1>Geeks Code Compiler</h1>
-			<Select
-				options={languages}
-				value={userLang}
-				onChange={(e) => setUserLang(e.value)}
-				placeholder={userLang}
-			/>
-			<Select
-				options={themes}
-				value={userTheme}
-				onChange={(e) => setUserTheme(e.value)}
-				placeholder={userTheme}
-			/>
+		<div className="">
+			<h1 className="text-lg font-medium text-gray-400">Code Compiler</h1>
+
+			<div className="flex gap-3">
+				<Select
+					options={languages}
+					value={userLang}
+					onChange={(e) => setUserLang(e.value)}
+					placeholder={userLang}
+				/>
+				<Select
+					options={themes}
+					value={userTheme}
+					onChange={(e) => setUserTheme(e.value)}
+					placeholder={userTheme}
+				/>
+			</div>
+
 			<label>Font Size</label>
 			<input
 				type="range"
