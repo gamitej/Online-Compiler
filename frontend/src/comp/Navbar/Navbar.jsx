@@ -8,6 +8,7 @@ const Navbar = ({
 	setUserTheme,
 	fontSize,
 	setFontSize,
+	btnClass,
 }) => {
 	const languages = [
 		{ value: "c", label: "C" },
@@ -24,8 +25,8 @@ const Navbar = ({
 		setFontSize(e.target.value);
 	};
 	return (
-		<div className="">
-			<h1 className="text-lg font-medium text-gray-400">Code Compiler</h1>
+		<div className="flex flex-row h-20 gap-3 items-center bg-slate-600 p-2">
+			<h1 className="text-3xl font-bold text-[#afec3f]">Code Compiler</h1>
 
 			<div className="flex gap-3">
 				<Select
@@ -42,7 +43,7 @@ const Navbar = ({
 				/>
 			</div>
 
-			<label>Font Size</label>
+			<label className="text-[#afec3f]">Font Size</label>
 			<input
 				type="range"
 				min="18"
@@ -51,6 +52,7 @@ const Navbar = ({
 				step="2"
 				onChange={handleInput}
 			/>
+			<button className={btnClass}>Run</button>
 		</div>
 	);
 };
