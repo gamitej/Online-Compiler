@@ -61,8 +61,8 @@ function App() {
 	};
 
 	return (
-		<div className="flex flex-col h-screen w-full justify-center items-center">
-			<div className="w-[50%]">
+		<div className="flex flex-col h-screen w-full">
+			<div className="w-full">
 				<Navbar
 					userLang={userLang}
 					setUserLang={setUserLang}

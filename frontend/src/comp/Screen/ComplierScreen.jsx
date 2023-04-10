@@ -2,7 +2,7 @@ import React from "react";
 
 const ComplierScreen = ({ setUserInput, userOutput, loading }) => {
 	return (
-		<div className="h-[15rem]">
+		<div className="w-full h-full">
 			<div className="flex flex-col bg-[#242424] p-3 relaive">
 				<h4 className="text-[#afec3f]">Input:</h4>
 				<div className="flex h-[13.5rem]">
