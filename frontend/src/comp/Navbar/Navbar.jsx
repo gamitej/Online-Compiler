@@ -3,13 +3,11 @@ import Select from "react-select";
 
 const Navbar = ({
   userLang,
-  setUserLang,
   userTheme,
-  setUserTheme,
   fontSize,
-  setFontSize,
   btnClass,
   compile,
+  handleChange,
 }) => {
   const languages = [
     { value: "c", label: "C" },
@@ -22,26 +20,22 @@ const Navbar = ({
     { value: "light", label: "Light" },
   ];
 
-  const handleInput = (e) => {
-    setFontSize(e.target.value);
-  };
-
   const dropDownList = [
     {
       options: languages,
       value: userLang,
-      changeEvent: (e) => setUserLang(e.value),
+      changeEvent: (e) => handleChange(e.value, "userLang"),
     },
     {
       options: themes,
       value: userTheme,
-      changeEvent: (e) => setUserTheme(e.value),
+      changeEvent: (e) => handleChange(e.value, "userTheme"),
     },
   ];
 
   return (
-    <div className="bg-slate-600 p-4">
-      <div className="flex  lg:flex-row flex-col items-center w-full gap-y-4">
+    <div className="bg-slate-600 h-full flex items-center justify-center">
+      <div className="flex  lg:flex-row flex-col items-center w-full gap-y-4 p-4">
         {/* Title & Dropdown */}
         <div className="flex items-center lg:w-[60%] w-full gap-x-6">
           <h1 className="text-3xl font-bold text-[#afec3f]">Code Compiler</h1>
@@ -69,7 +63,7 @@ const Navbar = ({
               max="30"
               value={fontSize}
               step="2"
-              onChange={handleInput}
+              onChange={(e) => handleChange(e.target.value, "fontSize")}
             />
           </div>
           <div className="flex justify-end">
